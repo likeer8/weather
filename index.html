@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width" />
+		<title></title>
+		<style>
+			body{
+				margin: 0;
+				padding: 0;
+			}
+			.top{
+				width: 100%;
+				height: 50vh;
+				transform-style: preserve-3d;
+				perspective: 1000px;
+				position: relative;	  
+			}
+			.weather{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				transform-origin:50% 50% -370px ;
+				z-index: 99;
+				
+			}
+			.weather h1,.weather h2,.weather p{
+				position: absolute;
+				left: 50%;
+				margin: 0;
+				transform: translate(-50%,-50%);
+				color: #2828ff; 
+				z-index: 999;
+			}
+			.weather h2{
+				top: 15%;
+				
+			}
+			.weather p{
+				font-size: 30px;
+				top: 30%;
+			}
+			.weather h1{
+				top: 48%;
+			}
+			/*多云天气*/
+			.couldy{
+				background-image: url(img/timg.jpg);
+				transform: rotateY(60deg);
+				transition: all 0.4s cubic-bezier(.62,1.73,.91,.58);
+			}
+			.top:hover .couldy{
+				transform: rotateY(0deg);
+			}
+			/*绘制云*/
+			.couldy::after{
+				content: "";
+				position: absolute;
+				left: 46%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+				width: 50px;
+				height: 50px;
+				border-radius:50% ;
+				background: white;
+				box-shadow:20px -10px white,
+				           45px -4px 0px -5px white,
+				           -15px -4px 0px -5px white,
+				           25px 5px 0px -5px white;
+				animation: yun 2s linear 0s alternate infinite;
+				
+			}
+			/*绘制太阳*/
+			.couldy::before{
+				content: "";
+				position: absolute;
+				left: 60%;
+				top: 44%;
+				transform: translate(-50%,-50%);
+				width: 50px;
+				height: 50px;
+				border-radius:50% ;
+				background-image: radial-gradient(at left top,#fe9f38,#f46635);	
+				box-shadow: 0 0 5px 2px red;		
+			}
+			@keyframes yun{
+				100%{
+					transform: translate(-10%,-50%);
+				}
+			}
+			/*晴天*/
+			.sun{
+				background-image: url(img/timg1.jpg);	
+				transition: all 0.4s cubic-bezier(.62,1.73,.91,.58);		
+			}
+			.top:hover .sun{
+				transform: rotateY(-60deg);
+			}
+			.sun::before{
+				content: "";
+				position: absolute;
+				background: yellow;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				animation:light 1s linear 0s alternate infinite;
+			}
+			@keyframes light{
+				100%{
+					box-shadow: 0px 0px 0px 15px rgba(0,0,0,0.2),
+				            0px 0px 0px 30px rgba(0,0,0,0.2);
+				}
+			}
+			/*bottom部分开始*/
+			.bottom{
+				display: flex;
+				justify-content: space-around;
+				align-items: stretch;
+			}
+			.bottom div{
+				display: flex;
+				flex-flow:1;
+				flex-direction: column;	
+				align-items: stretch;
+				justify-content: space-around;
+			}
+			.bottom div div{
+				color: #8e8e8e;
+				text-align: center;
+				flex-grow: 1;
+				padding: 20px;
+			}
+			.bottom div img{
+				flex-grow: 1;
+				width: 100%;
+				max-height:100% ;
+				padding-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="top">					
+			<div class=" weather sun" >
+				<h2 style="color: #642100;">HaErBin</h2>
+			    <p style="color: #642100;">sun</p>
+			    <h1 style="color: #642100;">4°</h1>
+			</div>
+			<div class="weather couldy">
+			   <h2>BeiJing</h2>
+			    <p>couldy</p>
+			    <h1>-4°</h1>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="mon">
+				<div class="date">Mon</div>
+				<div class="icon"><img src="img/2.png"/></div>
+				<div class="low">-3</div>
+				<div class="height">3</div>
+			</div>
+			<div class="tues">
+				<div class="date">Tues</div>
+				<div class="icon"><img src="img/cloud.png"/></div>
+				<div class="low">-2</div>
+				<div class="height">2</div>
+			</div>
+			<div class="wed">
+				<div class="date">Wed</div>
+				<div class="icon"><img src="img/5.png"/></div>
+				<div class="low">-4</div>
+				<div class="height">4</div>
+			</div>
+			<div class="thu">
+				<div class="date">Thu</div>
+				<div class="icon"><img src="img/sun.png"/></div>
+				<div class="low">-1</div>
+				<div class="height">1</div>
+			</div>
+			<div class="fri">
+				<div class="date">Fri</div>
+				<div class="icon"><img src="img/torm.png"/></div>
+				<div class="low">0</div>
+				<div class="height">5</div>
+			</div>
+		</div>
+	</body>
+</html>
